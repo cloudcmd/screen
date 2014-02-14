@@ -20,7 +20,7 @@
                 height: 50%;
             }
             .hidden {
-                display:none;
+                visibility:hidden;
             }
             .center {
                 text-align:center;
@@ -40,9 +40,6 @@
             .color:active {
                 color: pink;
             }
-            .color:hover {
-                color: rgb(49, 123, 249);
-            }
             .no-link{
                 text-decoration: none;
             }
@@ -50,14 +47,17 @@
         <link rel="stylesheet" href="nprogress.css"></style>
     </head>
     <body class="hide-overflow">
+        <div class="center mid-font">
+            Screens of <a class="color no-link" href="http://cloudcmd.io">Cloud Commander</a>.
+        </div>
         <div class="screens center">
             <img id="js-img" class="full-size" src="//cloudcmd.io/img/screen/menu.png"/>
             <div id="js-name" class="mid-font">Menu</div>
         </div>
         
          <div id="js-nav" class="nav big-font center">
-            <a class="color no-link" id="js-left" href="#left">←</a>
-            <a class="color no-link" id="js-right" href="#right">→</a>
+            <a class="hidden color no-link" id="js-left" href="#left" title="left">←</a>
+            <a class="color no-link" id="js-right" href="#right" title="right">→</a>
         </div>
         
         <script>
@@ -91,7 +91,7 @@
                         'cloudcmd-v0.3.0-edit.png',
                         'cloudcmd-v0.3.0-console.png',
                         'cloudcmd-v0.2.0-edit.png',
-                        'cloudmd-v0.2.0-console.png'
+                        'cloudcmd-v0.2.0-console.png'
                     ],
                     n           = Images.length - 1,
                     
@@ -111,7 +111,9 @@
                 
                 elRight.addEventListener('click', onRightClick);
                 
-                img.addEventListener('load', onImgLoad);
+                img.addEventListener('load', function() {
+                    NProgress.done();
+                });
                 
                 function keyDown(event) {
                     var keyCode  = event.keyCode,
@@ -129,17 +131,22 @@
                         }
                     } else if (keyCode === LEFT) {
                          if (count) {
-                                --count
-                                
-                                img.src = namePrev;
-                                elName.textContent = namePrev;
-                                NProgress.start();
-                            }
+                            --count
+                            
+                            img.src = namePrev;
+                            elName.textContent = namePrev;
+                            NProgress.start();
+                        }
                     }
-                }
-                
-                function onImgLoad() {
-                    NProgress.done(true);
+                    
+                    if (!count)
+                        elLeft.classList.add(HIDDEN)
+                    else if (count === n)
+                        elRight.classList.add(HIDDEN)
+                    else {
+                        elRight.classList.remove(HIDDEN)
+                        elLeft.classList.remove(HIDDEN)
+                    }
                 }
             })
         </script>
