@@ -1,0 +1,149 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Cloud Commander Screens</title>
+        <style>
+            @font-face {
+              font-family: 'Droid Sans Mono';
+              font-style: normal;
+              font-weight: normal;
+              src: local('Droid Sans Mono'), local('DroidSansMono'), url('//themes.googleusercontent.com/static/fonts/droidsansmono/v4/ns-m2xQYezAtqh7ai59hJUYuTAAIFFn5GTWtryCmBQ4.woff') format('woff');
+            }
+            .nav {
+                height: 20%;
+            }
+            .hide-overflow {
+                overflow:hidden;
+            }
+            .full-size {
+                width: 50%;
+                height: 50%;
+            }
+            .hidden {
+                display:none;
+            }
+            .center {
+                text-align:center;
+            }
+            .big-font {
+                font-family: 'Droid Sans Mono';
+                font-size: 60px;
+            }
+            .mid-font {
+                font-family: 'Droid Sans Mono';
+                font-size: 30px;
+            }
+            .color {
+                color: rgb(49, 123, 249);
+                color: rgba(49, 123, 249, 0.6);
+            }
+            .color:active {
+                color: pink;
+            }
+            .color:hover {
+                color: rgb(49, 123, 249);
+            }
+            .no-link{
+                text-decoration: none;
+            }
+        </style>
+        <link rel="stylesheet" href="nprogress.css"></style>
+    </head>
+    <body class="hide-overflow">
+        <div class="screens center">
+            <img id="js-img" class="full-size" src="//cloudcmd.io/img/screen/menu.png"/>
+            <div id="js-name" class="mid-font">Menu</div>
+        </div>
+        
+         <div id="js-nav" class="nav big-font center">
+            <a class="color no-link" id="js-left" href="#left">←</a>
+            <a class="color no-link" id="js-right" href="#right">→</a>
+        </div>
+        
+        <script>
+            window.addEventListener('load', function load() {
+                'use strict';
+                
+                var img         = document.querySelector('#js-img'),
+                    elLeft      = document.querySelector('#js-left'),
+                    elRight     = document.querySelector('#js-right'),
+                    elName      = document.querySelector('#js-name'),
+                    
+                    count       = 0,
+                    LEFT        = 37,
+                    RIGHT       = 39,
+                    HIDDEN      = 'hidden',
+                    Images      = [
+                        'cloudcmd-v0.8.0-menu.png',
+                        'cloudcmd-v0.8.0-edit.png',
+                        'cloudcmd-v0.8.0-console.png',
+                        'cloudcmd-v0.8.0-config.png',
+                        'cloudcmd-v0.6.0.png',
+                        'cloudcmd-v0.6.0-menu.png',
+                        'cloudcmd-v0.6.0-edit.png',
+                        'cloudcmd-v0.6.0-console.png',
+                        'cloudcmd-v0.6.0-config.png',
+                        'cloudcmd-v0.4.0.png',
+                        'cloudcmd-v0.4.0-menu.png',
+                        'cloudcmd-v0.4.0-edit.png',
+                        'cloudcmd-v0.4.0-console.png',
+                        'cloudcmd-v0.3.0.png',
+                        'cloudcmd-v0.3.0-edit.png',
+                        'cloudcmd-v0.3.0-console.png',
+                        'cloudcmd-v0.2.0-edit.png',
+                        'cloudmd-v0.2.0-console.png'
+                    ],
+                    n           = Images.length - 1,
+                    
+                    onLeftClick = keyDown.bind(null, {
+                       keyCode: LEFT 
+                    }),
+                    
+                    onRightClick = keyDown.bind(null, {
+                        keyCode: RIGHT
+                    });
+                
+                window.removeEventListener('load', load);
+                
+                window.addEventListener('keydown', keyDown);
+                
+                elLeft.addEventListener('click', onLeftClick);
+                
+                elRight.addEventListener('click', onRightClick);
+                
+                img.addEventListener('load', onImgLoad);
+                
+                function keyDown(event) {
+                    var keyCode  = event.keyCode,
+                        
+                        nameNext = Images[count + 1],
+                        namePrev = Images[count - 1];
+                    
+                    if (keyCode === RIGHT) {
+                        if (count < n) {
+                            ++count
+                            
+                            img.src = nameNext;
+                            elName.textContent = nameNext;
+                            NProgress.start();
+                        }
+                    } else if (keyCode === LEFT) {
+                         if (count) {
+                                --count
+                                
+                                img.src = namePrev;
+                                elName.textContent = namePrev;
+                                NProgress.start();
+                            }
+                    }
+                }
+                
+                function onImgLoad() {
+                    NProgress.done(true);
+                }
+            })
+        </script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script src="nprogress.js"></script>
+    </body>
+</html>
