@@ -134,7 +134,7 @@
                     
                     if (keyCode === RIGHT) {
                         if (count < n) {
-                            ++count
+                            ++count;
                             
                             img.src = nameNext;
                             elName.textContent = nameNext;
@@ -147,26 +147,26 @@
                         }
                     } else if (keyCode === LEFT) {
                          if (count) {
-                            --count
+                            --count;
                             
                             img.src = namePrev;
                             elName.textContent = namePrev;
                             NProgress.start();
                             
                             if (!noHistory)
-                                setHistory(namePrev)
+                                setHistory(namePrev);
                             
                             setTitle(namePrev);
                         }
                     }
                     
                     if (!count)
-                        elLeft.classList.add(HIDDEN)
+                        elLeft.classList.add(HIDDEN);
                     else if (count === n)
-                        elRight.classList.add(HIDDEN)
+                        elRight.classList.add(HIDDEN);
                     else {
-                        elRight.classList.remove(HIDDEN)
-                        elLeft.classList.remove(HIDDEN)
+                        elRight.classList.remove(HIDDEN);
+                        elLeft.classList.remove(HIDDEN);
                     }
                 }
                 
@@ -195,7 +195,7 @@
                     
                     event.preventDefault();
                 }
-            })
+            });
         </script>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <script src="nprogress.js"></script>
