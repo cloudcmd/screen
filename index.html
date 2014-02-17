@@ -51,13 +51,13 @@
             Screens of <a class="color no-link" href="http://cloudcmd.io">Cloud Commander</a>.
         </div>
         <div class="screens center">
-            <img id="js-img" class="full-size" src="//cloudcmd.io/img/screen/menu.png"/>
+            <img id="js-img" class="full-size" src="http://cloudcmd.io/img/screen/menu.png"/>
             <div id="js-name" class="mid-font">Menu</div>
         </div>
         
          <div id="js-nav" class="nav big-font center">
-            <a class="hidden color no-link" id="js-left" href="#left" title="left">←</a>
-            <a class="color no-link" id="js-right" href="#right" title="right">→</a>
+            <a class="hidden color no-link" id="js-left" href="" title="left">←</a>
+            <a class="color no-link" id="js-right" href="" title="right">→</a>
         </div>
         
         <script>
@@ -65,6 +65,7 @@
                 'use strict';
                 
                 var img         = document.querySelector('#js-img'),
+                    elTitle     = document.querySelector('title'),
                     elLeft      = document.querySelector('#js-left'),
                     elRight     = document.querySelector('#js-right'),
                     elName      = document.querySelector('#js-name'),
@@ -73,6 +74,7 @@
                     LEFT        = 37,
                     RIGHT       = 39,
                     HIDDEN      = 'hidden',
+                    TITLE       = 'Cloud Commander Screens',
                     Images      = [
                         'cloudcmd-v0.8.0-menu.png',
                         'cloudcmd-v0.8.0-edit.png',
@@ -105,19 +107,28 @@
                 
                 window.removeEventListener('load', load);
                 
+                window.addEventListener('popstate', onPopState);
+                
                 window.addEventListener('keydown', keyDown);
                 
-                elLeft.addEventListener('click', onLeftClick);
+                elLeft.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    onLeftClick();
+                });
                 
-                elRight.addEventListener('click', onRightClick);
+                elRight.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    onRightClick();
+                });
                 
                 img.addEventListener('load', function() {
                     NProgress.done();
                 });
                 
-                function keyDown(event) {
+                function keyDown(event, noHistory) {
                     var keyCode  = event.keyCode,
                         
+                        name     = Images[count],
                         nameNext = Images[count + 1],
                         namePrev = Images[count - 1];
                     
@@ -128,6 +139,11 @@
                             img.src = nameNext;
                             elName.textContent = nameNext;
                             NProgress.start();
+                            
+                            if (!noHistory)
+                                setHistory(nameNext);
+                            
+                            setTitle(nameNext);
                         }
                     } else if (keyCode === LEFT) {
                          if (count) {
@@ -136,6 +152,11 @@
                             img.src = namePrev;
                             elName.textContent = namePrev;
                             NProgress.start();
+                            
+                            if (!noHistory)
+                                setHistory(namePrev)
+                            
+                            setTitle(namePrev);
                         }
                     }
                     
@@ -147,6 +168,32 @@
                         elRight.classList.remove(HIDDEN)
                         elLeft.classList.remove(HIDDEN)
                     }
+                }
+                
+                function setHistory(data) {
+                    if (history) {
+                        history.pushState(data, null, data);
+                    }
+                }
+                
+                function setTitle(title) {
+                    elTitle.textContent = TITLE + ': ' + title;
+                }
+                
+                function onPopState(event) {
+                    var name         = event.state,
+                        NO_HISTORY   = true,
+                        number;
+                    
+                    if (name) {
+                        number = Images.indexOf(name);
+                        if (number > count)
+                            onRightClick(NO_HISTORY);
+                        else
+                            onLeftClick(NO_HISTORY);
+                    }
+                    
+                    event.preventDefault();
                 }
             })
         </script>
