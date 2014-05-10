@@ -76,26 +76,32 @@
                     HIDDEN      = 'hidden',
                     TITLE       = 'Cloud Commander Screens',
                     Images      = [
-                        'cloudcmd-v0.8.0-menu.png',
-                        'cloudcmd-v0.8.0-edit.png',
-                        'cloudcmd-v0.8.0-console.png',
-                        'cloudcmd-v0.8.0-config.png',
-                        'cloudcmd-v0.6.0.png',
-                        'cloudcmd-v0.6.0-menu.png',
-                        'cloudcmd-v0.6.0-edit.png',
-                        'cloudcmd-v0.6.0-console.png',
-                        'cloudcmd-v0.6.0-config.png',
-                        'cloudcmd-v0.4.0.png',
-                        'cloudcmd-v0.4.0-menu.png',
-                        'cloudcmd-v0.4.0-edit.png',
-                        'cloudcmd-v0.4.0-console.png',
-                        'cloudcmd-v0.3.0.png',
-                        'cloudcmd-v0.3.0-edit.png',
-                        'cloudcmd-v0.3.0-console.png',
-                        'cloudcmd-v0.2.0-edit.png',
-                        'cloudcmd-v0.2.0-console.png'
+                        'cloudcmd-v0.8.0-menu',
+                        'cloudcmd-v0.8.0-edit',
+                        'cloudcmd-v0.8.0-console',
+                        'cloudcmd-v0.8.0-config',
+                        'cloudcmd-v0.6.0',
+                        'cloudcmd-v0.6.0-menu',
+                        'cloudcmd-v0.6.0-edit',
+                        'cloudcmd-v0.6.0-console',
+                        'cloudcmd-v0.6.0-config',
+                        'cloudcmd-v0.4.0',
+                        'cloudcmd-v0.4.0-menu',
+                        'cloudcmd-v0.4.0-edit',
+                        'cloudcmd-v0.4.0-console',
+                        'cloudcmd-v0.3.0',
+                        'cloudcmd-v0.3.0-edit',
+                        'cloudcmd-v0.3.0-console',
+                        'cloudcmd-v0.2.0-edit',
+                        'cloudcmd-v0.2.0-console'
                     ],
                     n           = Images.length - 1,
+                    
+                    Images.map(function(name) {
+                        var ret = name + '.png';
+                        
+                        return ret;
+                    });
                     
                     onLeftClick = keyDown.bind(null, {
                        keyCode: LEFT 
