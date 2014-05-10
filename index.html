@@ -94,14 +94,13 @@
                         'cloudcmd-v0.3.0-console',
                         'cloudcmd-v0.2.0-edit',
                         'cloudcmd-v0.2.0-console'
-                    ],
-                    n           = Images.length - 1,
-                    
-                    Images.map(function(name) {
+                    ].map(function(name) {
                         var ret = name + '.png';
                         
                         return ret;
-                    });
+                    }),
+                    
+                    n           = Images.length - 1,
                     
                     onLeftClick = keyDown.bind(null, {
                        keyCode: LEFT 
