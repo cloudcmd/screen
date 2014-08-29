@@ -25,12 +25,14 @@
             .center {
                 text-align:center;
             }
-            .big-font {
+            .font-size-big {
                 font-family: 'Droid Sans Mono';
                 font-size: 60px;
             }
-            .mid-font {
+            .font-family {
                 font-family: 'Droid Sans Mono';
+            }
+            .font-size-mid {
                 font-size: 30px;
             }
             .color {
@@ -47,15 +49,15 @@
         <link rel="stylesheet" href="nprogress.css">
     </head>
     <body class="hide-overflow">
-        <div class="center mid-font">
+        <h1 class="center font-family">
             Screens of <a class="color no-link" href="http://cloudcmd.io">Cloud Commander</a>.
-        </div>
-        <div class="screens center">
+        </h1>
+        <div class="center">
             <img id="js-img" class="full-size" src="http://cloudcmd.io/img/screen/menu.png"/>
-            <div id="js-name" class="mid-font">Menu</div>
+            <div id="js-name" class="font-family font-size-mid">Menu</div>
         </div>
         
-         <div id="js-nav" class="nav big-font center">
+        <div id="js-nav" class="nav font-size-big center">
             <a class="hidden color no-link" id="js-left" href="" title="left">←</a>
             <a class="color no-link" id="js-right" href="" title="right">→</a>
         </div>
